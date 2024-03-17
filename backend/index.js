@@ -16,18 +16,23 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));    
 app.use(morgan("dev"));
-app.use(
-  cors({
-    origin: "https://expndeploy.onrender.com"
-  })
-);
+// Configure CORS middleware
+app.use(cors({
+  origin: "https://expndeployfront.onrender.com" // Set the correct origin
+}));
+
+
 app.options("*", cors());
 
 app.get("/ping", async (req, res) => {
-  const result = await pool.query("SELECT NOW ()");
-  res.send({
-    pong: result.rows[0].now,
-  });
+  try {
+    const result = await pool.query("SELECT NOW ()");
+    res.setHeader("Access-Control-Allow-Origin", "https://expndeployfront.onrender.com"); // Set the correct 'Access-Control-Allow-Origin' header
+    res.status(200).json({ pong: result.rows[0].now });
+  } catch (error) {
+    console.error("Error executing query:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 app.listen(PORT, () => {
