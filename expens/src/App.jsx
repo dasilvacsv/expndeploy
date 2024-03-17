@@ -13,7 +13,7 @@ function App() {
 
         <button
           onClick={async () => {
-            const res = await fetch(`${URL}/ping`);
+            const res = await fetch(`${URL}ping`);
             const data = await res.json();
             console.log(data);
             setResult(data);
