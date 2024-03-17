@@ -14,7 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://expndeployfront.onrender.com/",
+    origin: FRONTEND_URL,
   })
 );
 
