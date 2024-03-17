@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: FRONTEND_URL,
+    origin: "https://expndeploy.onrender.com"
   })
 );
 app.options("*", cors());
