@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "./App.css";
 
-const URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
-
 function App() {
   const [result, setResult] = useState("");
 
@@ -13,7 +11,7 @@ function App() {
 
         <button
           onClick={async () => {
-            const res = await fetch(`${URL}ping`);
+            const res = await fetch("https://expndeploy.onrender.com/ping");
             const data = await res.json();
             console.log(data);
             setResult(data);
